@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un Projet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Modifier le Projet</h1>
+    <form method="POST">
+        <input type="text" name="name" value="{{ project.name }}" required>
+        <textarea name="description" required>{{ project.description }}</textarea>
+        <button type="submit">💾 Mettre à jour</button>
+    </form>
+    <p><a href="/">⬅ Retour à l’accueil</a></p>
+</body>
+</html>

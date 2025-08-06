@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mes Projets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Mes Projets Redis</h1>
+
+    <!-- Recherche -->
+    <form method="GET" action="/">
+        <input type="text" name="q" placeholder="Rechercher un projet..." value="{{ request.args.get('q', '') }}">
+        <button type="submit">🔍 Rechercher</button>
+    </form>
+
+    <!-- Formulaire de création -->
+    <form method="POST">
+        <input type="text" name="name" placeholder="Nom du projet" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <button type="submit">➕ Ajouter</button>
+    </form>
+
+    <!-- Liste des projets -->
+    <h2>Projets enregistrés</h2>
+    {% for project in projects %}
+        <div class="project">
+            <h3>{{ project.name }}</h3>
+            <p>{{ project.description }}</p>
+            <small>📅 Créé le : {{ project.created_at }}</small><br>
+            <a href="/edit/{{ project.id }}">✏️ Modifier</a> |
+            <a href="/delete/{{ project.id }}" onclick="return confirm('Supprimer ce projet ?');">🗑️ Supprimer</a>
+        </div>
+    {% else %}
+        <p>Aucun projet pour l’instant.</p>
+    {% endfor %}
+</body>
+</html>
